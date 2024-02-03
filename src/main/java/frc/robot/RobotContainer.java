@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.commands.FlashingLEDs;
+import frc.robot.commands.RainbowLEDCycle;
 import frc.robot.subsystems.Subsystems;
 
 
@@ -30,11 +31,14 @@ public class RobotContainer {
 
     private JoystickButton joyButton10 = new JoystickButton(joystick, 10);
 
+    private JoystickButton joyButton1 = new JoystickButton(joystick, 1);
+
     private Subsystems subsystems = new Subsystems();
+    
 
   // The robot's subsystems and commands are defined here...
   public RobotContainer() {    
-    subsystems.leds.setDefaultCommand(new FlashingLEDs(Constants.ColorConstants.BLUE, Constants.ColorConstants.RED, subsystems.leds, 0.5));
+    //subsystems.leds.setDefaultCommand(new FlashingLEDs(Constants.ColorConstants.BLUE, Constants.ColorConstants.RED, subsystems.leds, 0.5));
     // Configure the trigger bindings
     configureBindings();
   }
@@ -55,6 +59,7 @@ public class RobotContainer {
    */
   private void configureBindings() {
     joyButton10.onTrue(new FlashingLEDs(Constants.ColorConstants.PINK, Constants.ColorConstants.BLUE, subsystems.leds, 0.5));
+    joyButton1.whileTrue(new RainbowLEDCycle(subsystems.leds));
   }
 
   /**
